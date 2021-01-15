@@ -69,3 +69,9 @@ Used stepwise regression to create the following models:
 ![alt text](https://github.com/nchin212/Rental_Bike_Prediction/blob/main/plots/bar2.png)
 
 Although the log transformation model has a slightly higher RMSE than the linear model, the R squared of the log transformation model is much higher (0.80). This indicates that 80% of the variance of count can be explained by the predictor variables, which makes it the better model.
+
+## Relevant Links
+
+**R Markdown :** https://nchin212.github.io/Rental_Bike_Prediction/rental.html
+
+**Portfolio :** https://nchin212.github.io/post/rental_bike_prediction/
