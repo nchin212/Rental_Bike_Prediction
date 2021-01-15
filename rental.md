@@ -162,7 +162,7 @@ the next known value.
 Feature Engineering
 -------------------
 
-Create multiple columns from datetime column, including another season
+Create multiple columns from `datetime` column, including another season
 column created from the months. Convert the columns to categorical and
 drop the `datetime` column.
 
@@ -182,7 +182,7 @@ drop the `datetime` column.
 When we compare the temperatures for `season` and `season2`, we realise
 that `season` has higher temperatures in autumn than summer, which does
 not seem accurate. Thus, we are going to use `season2` instead of
-`season1`.
+`season`.
 
     box1 <- rental %>% group_by(season) %>% select(temp) %>% ggplot(aes(x=season,y=temp,fill=season)) + geom_boxplot()
     box2 <- rental %>% group_by(season2) %>% select(temp) %>% ggplot(aes(x=season2,y=temp,fill=season2)) + geom_boxplot()
@@ -343,7 +343,7 @@ is related to it.
     ##  $ month     : Factor w/ 12 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...
     ##  $ season2   : Factor w/ 4 levels "1","2","3","4": 4 4 4 4 4 4 4 4 4 4 ...
 
-Split the data into training nd test sets.
+Split the data into training and test sets.
 
     set.seed(100)
     trainIndex <- createDataPartition(rentalKeep$count, p = 0.8, list=FALSE)

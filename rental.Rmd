@@ -78,7 +78,7 @@ rental$windspeed <- na.locf(rental$windspeed, fromLast = TRUE, na.rm=FALSE)
 
 ## Feature Engineering
 
-Create multiple columns from datetime column, including another season column created from the months. Convert the columns to categorical and drop the `datetime` column.
+Create multiple columns from `datetime` column, including another season column created from the months. Convert the columns to categorical and drop the `datetime` column.
 ```{r}
 rental$datetime <- ymd_hms(rental$datetime)
 rental$week <- factor(week(rental$datetime))
@@ -94,7 +94,7 @@ rental$season2 <- factor(rental$season2)
 rental <- subset(rental, select = -datetime)
 ```
 
-When we compare the temperatures for `season` and `season2`, we realise that `season` has higher temperatures in autumn than summer, which does not seem accurate. Thus, we are going to use `season2` instead of `season1`.
+When we compare the temperatures for `season` and `season2`, we realise that `season` has higher temperatures in autumn than summer, which does not seem accurate. Thus, we are going to use `season2` instead of `season`.
 ```{r}
 box1 <- rental %>% group_by(season) %>% select(temp) %>% ggplot(aes(x=season,y=temp,fill=season)) + geom_boxplot()
 box2 <- rental %>% group_by(season2) %>% select(temp) %>% ggplot(aes(x=season2,y=temp,fill=season2)) + geom_boxplot()
@@ -223,7 +223,7 @@ rentalKeep <- subset(rentalOut, select = -c(atemp,registered,casual,holiday))
 str(rentalKeep)
 ```
 
-Split the data into training nd test sets.
+Split the data into training and test sets.
 ```{r}
 set.seed(100)
 trainIndex <- createDataPartition(rentalKeep$count, p = 0.8, list=FALSE)

@@ -511,7 +511,7 @@ rental$windspeed &lt;- na.locf(rental$windspeed, fromLast = TRUE, na.rm=FALSE)</
 </div>
 <div id="feature-engineering" class="section level2">
 <h2>Feature Engineering</h2>
-<p>Create multiple columns from datetime column, including another season column created from the months. Convert the columns to categorical and drop the <code>datetime</code> column.</p>
+<p>Create multiple columns from <code>datetime</code> column, including another season column created from the months. Convert the columns to categorical and drop the <code>datetime</code> column.</p>
 <pre class="r"><code>rental$datetime &lt;- ymd_hms(rental$datetime)
 rental$week &lt;- factor(week(rental$datetime))
 rental$hour &lt;- factor(hour(rental$datetime))
@@ -524,7 +524,7 @@ rental$season2 &lt;- ifelse((rental$month &lt;=5) &amp; (rental$month &gt;=3), 1
 rental$month &lt;- factor(rental$month)
 rental$season2 &lt;- factor(rental$season2)
 rental &lt;- subset(rental, select = -datetime)</code></pre>
-<p>When we compare the temperatures for <code>season</code> and <code>season2</code>, we realise that <code>season</code> has higher temperatures in autumn than summer, which does not seem accurate. Thus, we are going to use <code>season2</code> instead of <code>season1</code>.</p>
+<p>When we compare the temperatures for <code>season</code> and <code>season2</code>, we realise that <code>season</code> has higher temperatures in autumn than summer, which does not seem accurate. Thus, we are going to use <code>season2</code> instead of <code>season</code>.</p>
 <pre class="r"><code>box1 &lt;- rental %&gt;% group_by(season) %&gt;% select(temp) %&gt;% ggplot(aes(x=season,y=temp,fill=season)) + geom_boxplot()
 box2 &lt;- rental %&gt;% group_by(season2) %&gt;% select(temp) %&gt;% ggplot(aes(x=season2,y=temp,fill=season2)) + geom_boxplot()
 grid.arrange(box1, box2, nrow=2)</code></pre>
@@ -642,7 +642,7 @@ str(rentalKeep)</code></pre>
 ##  $ weekday   : Factor w/ 7 levels &quot;Sunday&quot;,&quot;Monday&quot;,..: 7 7 7 7 7 7 7 7 7 7 ...
 ##  $ month     : Factor w/ 12 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ season2   : Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 4 4 4 4 4 4 4 4 4 4 ...</code></pre>
-<p>Split the data into training nd test sets.</p>
+<p>Split the data into training and test sets.</p>
 <pre class="r"><code>set.seed(100)
 trainIndex &lt;- createDataPartition(rentalKeep$count, p = 0.8, list=FALSE)
 rentalTrain &lt;- rentalKeep[trainIndex,]
